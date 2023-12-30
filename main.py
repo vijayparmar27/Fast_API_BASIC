@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 import uvicorn
 
@@ -43,6 +43,13 @@ class Item(BaseModel):
 @app.post("/items/")
 async def create_item(item: Item) -> Item:
     return item
+
+@app.post("/signup")
+async def index(request: Request):
+    data = await request.json()
+    print("signup :: request :: ", data)
+    # print("signup :: request :: ",dict(request.receive))
+    return "........!!!!???"
 
 # if __name__ == '__main__':                          # this only for development 
 #     uvicorn.run("main:app",port=9000,reload=True)
